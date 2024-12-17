@@ -1,5 +1,6 @@
 ﻿using DesignPatterns.Patterns.Builder.Classes;
 using DesignPatterns.Patterns.FluentBuilder.Classes;
+using DesignPatterns.Patterns.FunctionalBuilder.Models;
 using DesignPatterns.Patterns.LiskovSubstitutionPrinciple.Classes;
 using DesignPatterns.Patterns.OpenClosedPrinciple.Class;
 using DesignPatterns.Patterns.SRP;
@@ -118,6 +119,16 @@ namespace DesignPatterns
             Console.WriteLine(bow);
             Console.WriteLine(staff);
 
+            //Functional Builder Pattern
+            var equipment = new EquipmentBuilder()
+                .Industry("Mining")
+                .EquipmentType("Excavator")
+                .EquipmentMake("JCB")
+                .EquipmentModel("5Tx")
+                .PurchaseYear(2025)
+                .Build();
+
+            Console.WriteLine(equipment.Industry + " " + equipment.Type + " " + equipment.Make + " " + equipment.Model + " " + equipment.PurchaseYear);
         }
     }
 }
