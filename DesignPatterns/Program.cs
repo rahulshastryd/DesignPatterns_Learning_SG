@@ -3,6 +3,7 @@ using DesignPatterns.Patterns.FluentBuilder.Classes;
 using DesignPatterns.Patterns.FunctionalBuilder.Models;
 using DesignPatterns.Patterns.LiskovSubstitutionPrinciple.Classes;
 using DesignPatterns.Patterns.OpenClosedPrinciple.Class;
+using DesignPatterns.Patterns.ProxyPattern.Models;
 using DesignPatterns.Patterns.SRP;
 using System;
 
@@ -129,6 +130,18 @@ namespace DesignPatterns
                 .Build();
 
             Console.WriteLine(equipment.Industry + " " + equipment.Type + " " + equipment.Make + " " + equipment.Model + " " + equipment.PurchaseYear);
+
+            //Proxy Pattern 
+            Console.WriteLine("Client passing employee with Role Developer to folderproxy");
+            Employee emp1 = new Employee("Anurag", "Anurag123", "Developer");
+            FolderProxy folderProxy1 = new FolderProxy(emp1);
+            folderProxy1.PerformReadWriteOperatrion();
+            Console.WriteLine();
+            Console.WriteLine("Client passing employee with Role Manager to folderproxy");
+            Employee emp2 = new Employee("Pranaya", "Pranaya123", "Manager");
+            FolderProxy folderProxy2 = new FolderProxy(emp2);
+            folderProxy2.PerformReadWriteOperatrion();
+            Console.Read();
         }
     }
 }
