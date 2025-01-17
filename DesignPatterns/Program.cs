@@ -1,4 +1,8 @@
 ﻿using DesignPatterns.Patterns.Builder.Classes;
+using DesignPatterns.Patterns.Factory.AbstractFactory.Factory;
+using DesignPatterns.Patterns.Factory.AbstractFactory.Factory.DocumentFactory;
+using DesignPatterns.Patterns.Factory.AbstractFactory.Interfaces;
+using DesignPatterns.Patterns.Factory.AbstractFactory.Interfaces.IFormatter;
 using DesignPatterns.Patterns.FluentBuilder.Classes;
 using DesignPatterns.Patterns.FunctionalBuilder.Models;
 using DesignPatterns.Patterns.LiskovSubstitutionPrinciple.Classes;
@@ -132,16 +136,48 @@ namespace DesignPatterns
             Console.WriteLine(equipment.Industry + " " + equipment.Type + " " + equipment.Make + " " + equipment.Model + " " + equipment.PurchaseYear);
 
             //Proxy Pattern 
-            Console.WriteLine("Client passing employee with Role Developer to folderproxy");
-            Employee emp1 = new Employee("Anurag", "Anurag123", "Developer");
-            FolderProxy folderProxy1 = new FolderProxy(emp1);
-            folderProxy1.PerformReadWriteOperatrion();
-            Console.WriteLine();
-            Console.WriteLine("Client passing employee with Role Manager to folderproxy");
-            Employee emp2 = new Employee("Pranaya", "Pranaya123", "Manager");
-            FolderProxy folderProxy2 = new FolderProxy(emp2);
-            folderProxy2.PerformReadWriteOperatrion();
-            Console.Read();
+            //Console.WriteLine("Client passing employee with Role Developer to folderproxy");
+            //Employee emp1 = new Employee("Anurag", "Anurag123", "Developer");
+            //FolderProxy folderProxy1 = new FolderProxy(emp1);
+            //folderProxy1.PerformReadWriteOperatrion();
+            //Console.WriteLine();
+            //Console.WriteLine("Client passing employee with Role Manager to folderproxy");
+            //Employee emp2 = new Employee("Pranaya", "Pranaya123", "Manager");
+            //FolderProxy folderProxy2 = new FolderProxy(emp2);
+            //folderProxy2.PerformReadWriteOperatrion();
+            //Console.Read();
+
+            // Factory Design Pattern
+            Console.WriteLine("Select the Payment Gateway(PayPal, Stripe, CreditCard) :");
+            string gatewayName = Console.ReadLine();
+            try
+            {
+                IPaymentGateway paymentGateway = PaymentGateWayFactory.CreatePaymentGateway(gatewayName);
+                paymentGateway.ProcessPayment(99.99M);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadKey();
+
+            Console.WriteLine("Enter the content to convert");
+            string content = Console.ReadLine();
+
+            Console.WriteLine("Select the type format you want to convert(DOCX,PDF,TXT)");
+            string fileFormat = Console.ReadLine();
+            try
+            {
+                IDocumentConverter documentConverter = DocumentConverterFactory.CreateDocumentConverter(fileFormat);
+                Console.WriteLine(documentConverter.Convert(content));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+
         }
     }
 }
