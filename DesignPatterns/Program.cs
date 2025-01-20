@@ -1,4 +1,5 @@
 ﻿using DesignPatterns.Patterns.Builder.Classes;
+using DesignPatterns.Patterns.CommandPattern.Classes.Invoker;
 using DesignPatterns.Patterns.Factory.AbstractFactory.Factory;
 using DesignPatterns.Patterns.Factory.AbstractFactory.Factory.DocumentFactory;
 using DesignPatterns.Patterns.Factory.AbstractFactory.Interfaces;
@@ -10,6 +11,8 @@ using DesignPatterns.Patterns.OpenClosedPrinciple.Class;
 using DesignPatterns.Patterns.ProxyPattern.Models;
 using DesignPatterns.Patterns.SRP;
 using System;
+using DesignPatterns.Patterns.CommandPattern.Classes.Models;
+using System.Collections.Generic;
 
 namespace DesignPatterns
 {
@@ -177,6 +180,48 @@ namespace DesignPatterns
                 Console.WriteLine(ex.Message);
                 throw;
             }
+
+            //Command Pattern
+            DineChef dineChef = new DineChef();
+            dineChef.SetOrderCommand(1);
+            dineChef.SetMenuItem(new MenuItem()
+            {
+                Item = "Vegetable Burger",
+                Quantity = 1,
+                TableNumber = 3,
+                Tags = new List<Tag>
+                {
+                    new Tag() { TagName = "Jalapenos,"}, new Tag() { TagName = " Cheese," }, new Tag() { TagName = " Tomato" }
+                }
+            });
+            dineChef.ExecuteCommand();
+
+            dineChef.SetOrderCommand(1);
+            dineChef.SetMenuItem(new MenuItem()
+            {
+                Item = "Veg Momos",
+                Quantity = 2,
+                TableNumber = 9,
+                Tags = new List<Tag>
+                {
+                    new Tag() { TagName = "Jalapenos,"}, new Tag() { TagName = " Cheese," }, new Tag() { TagName = " Tomato" }
+                }
+            });
+
+            //dineChef.SetOrderCommand(3);
+            //dineChef.SetMenuItem(new MenuItem()
+            //{
+            //    Item = "Veg Momos",
+            //    Quantity = 2,
+            //    TableNumber = 9,
+            //    Tags = new List<Tag>
+            //    {
+            //        new Tag() { TagName = "Jalapenos,"}, new Tag() { TagName = " Cheese," }, new Tag() { TagName = " Tomato" }
+            //    }
+            //});
+
+            dineChef.ExecuteCommand();
+            dineChef.ShowCurrentOrder();
 
         }
     }
