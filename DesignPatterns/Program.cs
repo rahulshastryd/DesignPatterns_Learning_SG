@@ -13,6 +13,9 @@ using DesignPatterns.Patterns.SRP;
 using System;
 using DesignPatterns.Patterns.CommandPattern.Classes.Models;
 using System.Collections.Generic;
+using DesignPatterns.Patterns.Adapter.Interfaces;
+using DesignPatterns.Patterns.Adapter.Adapter;
+using DesignPatterns.Patterns.Facade.FacadeClass;
 
 namespace DesignPatterns
 {
@@ -208,21 +211,35 @@ namespace DesignPatterns
                 }
             });
 
-            //dineChef.SetOrderCommand(3);
+            //dineChef.SetOrderCommand(2);/* Modify Order */
             //dineChef.SetMenuItem(new MenuItem()
             //{
-            //    Item = "Veg Momos",
-            //    Quantity = 2,
-            //    TableNumber = 9,
-            //    Tags = new List<Tag>
-            //    {
-            //        new Tag() { TagName = "Jalapenos,"}, new Tag() { TagName = " Cheese," }, new Tag() { TagName = " Tomato" }
-            //    }
+            //    TableNumber = 1,
+            //    Item = "Super Mega Burger",
+            //    Quantity = 1,
+            //    Tags = new List<Tag>() { new Tag() { TagName = "Jalapenos," }, new Tag() { TagName = " Cheese" } }
             //});
+            //dineChef.ExecuteCommand();
 
-            dineChef.ExecuteCommand();
-            dineChef.ShowCurrentOrder();
+            //dineChef.ExecuteCommand();
+            //dineChef.ShowCurrentOrder();
 
+            //Adapter Pattern 
+            string[,] employeesArray = new string[5, 4]
+            {
+                {"101","John","SE","10000"},
+                {"102","Smith","SE","20000"},
+                {"103","Dev","SSE","30000"},
+                {"104","Pam","SE","40000"},
+                {"105","Sara","SSE","50000"}
+            };
+
+            ITarget employeeAdapter = new EmployeeAdapter();
+            employeeAdapter.ProcessCompanySalary(employeesArray);
+            Console.Read();
+
+            Order order = new Order();
+            order.PlaceOrder();
         }
     }
 }
